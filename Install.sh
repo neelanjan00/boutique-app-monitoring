@@ -20,7 +20,7 @@ else
     echo Boutique app is deployed in $ns_name namepace
 fi
 ## Applying monitoring setup
-kubectl apply -f https://raw.githubusercontent.com/Adarshkumar14/boutique-app-monitoring/main/manifest/monitoring.yaml -n $ns_name
+kubectl apply -f  ./monitoring.yaml -n $ns_name
 exit_status=$?
 if [ $exit_status -eq 1 ]; then
     echo "Unable to apply monitoring manifest"
