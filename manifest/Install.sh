@@ -11,7 +11,7 @@ else
     echo $ns_name is created
 fi
 ## Applying Boutique app manifest
-kubectl apply -f https://raw.githubusercontent.com/chaosnative/online-boutique-app/main/release/kubernetes-manifests.yaml -n $ns_name
+kubectl apply -f https://raw.githubusercontent.com/Adarshkumar14/boutique-app-monitoring/main/manifest/app.yaml -n $ns_name
 exit_status=$?
 if [ $exit_status -eq 1 ]; then
     echo "Unable to apply app manifest"
