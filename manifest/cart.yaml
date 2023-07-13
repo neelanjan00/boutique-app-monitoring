@@ -5,9 +5,10 @@ metadata:
     app: cartservice
     event: chaos-day
   name: cartservice
+  namespace: boutique
 spec:
   revisionHistoryLimit: 10
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: cartservice
@@ -16,13 +17,14 @@ spec:
       labels:
         app: cartservice
     spec:
+      serviceAccountName: cartservice
       containers:
       - env:
         - name: REDIS_ADDR
           value: redis-cart:6379
         image: gcr.io/google-samples/microservices-demo/cartservice:v0.3.8
-        #image: ksatchit/cartservice:0.1.0
-        imagePullPolicy: IfNotPresent
+        #image: karthiksatchitanand/cartservice:cra-0.1.0
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -30,7 +32,7 @@ spec:
             - -addr=:7070
             - -rpc-timeout=5s
           failureThreshold: 3
-          initialDelaySeconds: 15
+          initialDelaySeconds: 10
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
@@ -45,7 +47,13 @@ spec:
             - -addr=:7070
             - -rpc-timeout=5s
           failureThreshold: 3
-          initialDelaySeconds: 10
+          initialDelaySeconds: 15
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
+        resources: {}
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
