@@ -1863,7 +1863,7 @@ data:
     scrape_configs:
       - job_name: 'chaos-exporter'
         static_configs:
-          - targets: ['chaos-exporter.litmus.svc.cluster.local:8080']
+          - targets: ['chaos-exporter.hce.svc.cluster.local:8080']
         relabel_configs:
           - target_label: instance
             replacement: 'chaos-exporter-service'
